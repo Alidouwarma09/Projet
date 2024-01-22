@@ -1,0 +1,111 @@
+<!-- Admin/templates/user_list.html -->
+{% extends 'admin_base.html' %}
+{% if user.is_authenticated %}
+    {% load static %}
+    {% block content%}
+        <body class="hold-transition dark-mode sidebar-mini layout-fixed layout-navbar-fixed layout-footer-fixed">
+        <style>
+            .success-message {
+                background-color: #d4edda;
+                color: #155724;
+                padding: 10px;
+                margin-bottom: 10px;
+                border: 1px solid #c3e6cb;
+                border-radius: 5px;
+            }
+        </style>
+        {% include 'admin_nav.html' %}
+        <div class="wrapper">
+        <div class="wrapper">
+        <div class="content-wrapper">
+            <section class="content-header">
+                <div class="container-fluid">
+                    <div class="row mb-2">
+                        <div class="col-sm-6">
+                            <h1>Enregistrement d'un utilisateur</h1>
+                        </div>
+                        <div class="col-sm-6">
+                            <ol class="breadcrumb float-sm-right">
+                                <li class="breadcrumb-item"><a href="#">Home</a></li>
+                                <li class="breadcrumb-item active">Enregistrement d'un utilisateur</li>
+                            </ol>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            <section class="content">
+                <div class="container-fluid">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="card card-primary">
+                                <div class="card-header">
+                                    <h3 class="card-title">Les informations de l'utilisateur</h3>
+                                </div>
+                                <form method="post" action="{% url 'admin:admin_create_user' %}" enctype="multipart/form-data">
+                                    {% csrf_token %}
+                                    <div class="card-body">
+                                        <div class="form-group">
+                                            <label for="id_nom">Nom</label>
+                                            <input type="text" name="nom" class="form-control" id="id_nom" placeholder="Nom" required>
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="id_prenom">Prénom</label>
+                                            <input type="text" name="prenom" class="form-control" id="id_prenom" placeholder="Prénom" required>
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="id_username">Numéro de téléphone</label>
+                                            <input type="number" name="username" class="form-control" id="id_username" placeholder="Numéro de téléphone" required>
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="id_password1">Mot de passe</label>
+                                            <input type="password" name="password1" class="form-control" id="id_password1" placeholder="Mot de passe" required>
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="id_password2">Confirmez le mot de passe</label>
+                                            <input type="password" name="password2" class="form-control" id="id_password2" placeholder="Confirmez le mot de passe" required>
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="id_role">Role</label>
+                                            <select name="role" class="form-control" id="id_role">
+                                                {% for value, label in form.role.field.choices %}
+                                                    <option value="{{ value }}">{{ label }}</option>
+                                                {% endfor %}
+                                            </select>
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="id_photo">Image</label>
+                                            <div class="input-group">
+                                                <div class="custom-file">
+                                                    <input type="file" name="photo" class="custom-file-input" id="id_photo">
+                                                    <label class="custom-file-label" for="id_photo">Choisir une image</label>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="card-footer">
+                                        <button type="submit" class="btn btn-primary">Enregistrer</button>
+                                        <div id="success-message" class="success-message" >
+                                            {% for message in messages %}
+                                                {{ message }}
+                                            {% endfor %}
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </div>
+        <script>
+            // JavaScript to hide the success message after 3 seconds
+            document.addEventListener('DOMContentLoaded', function() {
+                setTimeout(function() {
+                    document.getElementById('success-message').style.display = 'none';
+                }, 3000);
+            });
+        </script>
+    {% endblock %}
+{% else %}
+    Vous devez être connecté pour accéder à cette page. <a href="">Se connecter</a>.
+{% endif %}

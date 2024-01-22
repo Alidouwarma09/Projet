@@ -1,0 +1,117 @@
+
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+<body class="hold-transition register-page">
+<div class="register-box">
+    <div class="card card-outline card-primary">
+        <div class="card-header text-center">
+            <a href="../../index2.html" class="h1"><b>inscription</b></a>
+        </div>
+        <div class="card-body">
+
+            <form method="post" class="login__registre" id="login-in" action="{% url 'utilisateurs:inscription'%}" enctype="multipart/form-data">
+            {% csrf_token %}
+                {% if form.nom.errors %}
+                    <div class="error-message text-danger">
+                        {{ form.nom.errors.0 }}
+                    </div>
+                {% endif %}
+                <div class="input-group mb-3">
+                    <input type="text" class="form-control" placeholder="Nom" name="nom">
+                    <div class="input-group-append">
+                        <div class="input-group-text">
+                            <span class="fas fa-user"></span>
+
+                        </div>
+
+                    </div>
+
+                </div>
+                {% if form.prenom.errors %}
+                    <div class="error-message text-danger">
+                        {{ form.prenom.errors.0 }}
+                    </div>
+                {% endif %}
+                <div class="input-group mb-3">
+                    <input type="text" class="form-control" placeholder="Prenom"  name="prenom">
+                    <div class="input-group-append">
+                        <div class="input-group-text">
+                            <span class="fas fa-user"></span>
+                        </div>
+                    </div>
+                </div>
+                {% if form.username.errors %}
+                    <div class="error-message text-danger">
+                        {{ form.username.errors.0 }}
+                    </div>
+                {% endif %}
+                <div class="input-group mb-3">
+                    <input type="number" class="form-control" placeholder="Numero" name="username">
+                    <div class="input-group-append">
+                        <div class="input-group-text">
+                            <span class="fas fa-phone"></span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="input-group mb-3">
+                    <input type="file" class="form-control" placeholder="Choisir une image" name="photo">
+                    <div class="input-group-append">
+                        <div class="input-group-text">
+                            <span class="fas fa-image"></span>
+                        </div>
+                    </div>
+                </div>
+                <div class="input-group mb-3">
+                    <input type="password" class="form-control" placeholder="Mot de passe" name="password1">
+                    <div class="input-group-append">
+                        <div class="input-group-text">
+                            <span class="fas fa-lock"></span>
+                        </div>
+                    </div>
+                </div>
+                <div class="input-group mb-3">
+                    <input type="password" class="form-control" placeholder="Confirmer le mot de passe" name="password2">
+                    <div class="input-group-append">
+                        <div class="input-group-text">
+                            <span class="fas fa-lock"></span>
+                        </div>
+                    </div>
+                </div>
+                {% if form.password1.errors %}
+                    <div class="error-message text-danger">
+                        {{ form.password1.errors.0 }}
+                    </div>
+                {% endif %}
+                {% if form.password2.errors %}
+                    <div class="error-message text-danger">
+                        {{ form.password2.errors.0 }}
+                    </div>
+                {% endif %}
+
+                <!-- /.col -->
+                    <div class="">
+                        <button type="submit" class="btn btn-primary btn-block">S'inscrire</button>
+                    </div>
+                    <!-- /.col -->
+                </div>
+            </form>
+
+            <div class="social-auth-links text-center">
+                <a href="#" class="btn btn-block btn-primary">
+                    <i class="fab fa-facebook mr-2"></i>
+                    Sign up using Facebook
+                </a>
+                <a href="#" class="btn btn-block btn-danger">
+                    <i class="fab fa-google-plus mr-2"></i>
+                    Sign up using Google+
+                </a>
+            </div>
+
+            <a href="{% url 'utilisateurs:connexion' %}" class="text-center">J'ai déjà un compte</a>
+        </div>
+        <!-- /.form-box -->
+    </div><!-- /.card -->
+</div>
+{% endblock %}

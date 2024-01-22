@@ -1,0 +1,108 @@
+
+{% extends 'admin_base.html' %}
+{% if user.is_authenticated %}
+    {% load static %}
+    {% block content%}
+        <body class="hold-transition dark-mode sidebar-mini layout-fixed layout-navbar-fixed layout-footer-fixed">
+        <style>
+            /* Styles pour les messages que vous envoyez */
+            .float-right{
+
+            }
+        </style>
+        {% include 'admin_nav.html' %}
+        <div class="wrapper">
+            <div class="content-wrapper">
+                <div class="content-header">
+                    <div class="container-fluid">
+                        <div class="row mb-2">
+                            <div class="col-sm-6">
+                                <h1 class="m-0">Dashboard v2</h1>
+                            </div>
+                            <div class="col-sm-6">
+                                <ol class="breadcrumb float-sm-right">
+                                    <li class="breadcrumb-item"><a href="#">Home</a></li>
+                                    <li class="breadcrumb-item active">Dashboard v2</li>
+                                </ol>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <section class="content">
+                    <div class="container-fluid">
+                        <div class="row">
+                            <!-- Left col -->
+                            <div class="col-md-8">
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <!-- DIRECT CHAT -->
+                                        <div class="card direct-chat direct-chat-warning">
+                                            <div class="card-header">
+                                                <h3 class="card-title">{{ recipient.nom }} {{ recipient.prenom }} {%  if recipient.is_online  %}en ligne <span style="font-size: 50px; color:#588113">.</span>{%  else%} {{ recipient.last_login }} Hors ligne{%  endif%}</h3>
+
+                                                <div class="card-tools">
+                                                    <span title="3 New Messages" class="badge badge-warning">3</span>
+                                                    <button type="button" class="btn btn-tool" data-card-widget="collapse">
+                                                        <i class="fas fa-minus"></i>
+                                                    </button>
+                                                    <button type="button" class="btn btn-tool" title="Contacts" data-widget="chat-pane-toggle">
+                                                        <i class="fas fa-comments"></i>
+                                                    </button>
+                                                    <button type="button" class="btn btn-tool" data-card-widget="remove">
+                                                        <i class="fas fa-times"></i>
+                                                    </button>
+                                                </div>
+                                            </div>
+                                            <!-- /.card-header -->
+                                            <div class="card-body">
+                                                <!-- Conversations are loaded here -->
+                                                <div class="direct-chat-messages">
+                                                    {% for message in messages %}
+                                                        <div class="direct-chat-msg {% if message.sender == user %}right{% endif %}">
+                                                            <div class="direct-chat-infos clearfix">
+                                                                <span class="direct-chat-timestamp {% if message.sender == user %}float-left{% else %}float-right{% endif %}">
+                                                            {{ message.timestamp|date:"d M Y H:i:s" }}
+                                                        </span>
+                                                            </div>
+                                                            <div class="direct-chat-text {% if message.sender == user %}float-right {% else %}float-left{% endif %}" {% if message.sender == user %}style="background-color: #8f959b" {% else %}style="background-color: red"{% endif %}>
+                                                                {{ message.content }}
+                                                            </div>
+                                                            <!-- /.direct-chat-text -->
+                                                        </div>
+                                                        <!-- /.direct-chat-msg -->
+
+                                                        <!-- /.direct-chat-msg -->
+                                                    {% endfor %}
+                                                </div>
+                                                <!-- /.card-body -->
+                                                <div class="card-footer">
+                                                    <form action="{% url 'admin:messages' user_id=recipient.id %}" method="post">
+                                                        {% csrf_token %}
+                                                        <div class="input-group">
+                                                            <input type="text" name="content" placeholder="Type Message ..." class="form-control">
+                                                            <span class="input-group-append">
+                                                                <button type="submit" class="btn btn-warning">Envoyer</button>
+                                                            </span>
+                                                        </div>
+                                                    </form>
+                                                </div>
+                                                <!-- /.card-footer-->
+                                            </div>
+                                            <!--/.direct-chat -->
+                                        </div>
+                                        <!-- /.col -->
+                                    </div>
+                                    <!-- /.card -->
+                                </div>
+                                <!-- /.col -->
+                            </div>
+                        </div>
+                </section>
+            </div>
+            <aside class="control-sidebar control-sidebar-dark">
+            </aside>
+        </div>
+    {% endblock %}
+{% else %}
+Vous devez être connecté pour accéder à cette page. <a href="{% url 'utilisateurs:Connexion' %}">Se connecter</a>.
+{% endif %}

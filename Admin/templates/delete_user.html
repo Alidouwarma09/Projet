@@ -1,0 +1,28 @@
+<!-- Admin/templates/user_list.html -->
+{% extends 'admin_base.html' %}
+{% if user.is_authenticated %}
+    {% load static %}
+    {% block content%}
+        <body class="hold-transition dark-mode sidebar-mini layout-fixed layout-navbar-fixed layout-footer-fixed">
+        {% include 'admin_nav.html' %}
+        <div class="wrapper">
+        <div class="wrapper">
+        <div class="content-wrapper">
+            <div class="container mt-5">
+                <div class="card">
+                    <div class="card-body">
+                        <h2 class="card-title">Confirmation de suppression</h2>
+                        <p class="card-text">Êtes-vous sûr de vouloir supprimer l'utilisateur {{ utilisateur.username }} ?</p>
+                        <form method="post" action="{% url 'admin:admin_delete_user' utilisateur.id %}">
+                            {% csrf_token %}
+                            <button type="submit" class="btn btn-danger">Supprimer</button>
+                            <a href="{% url 'admin:tous_les_user' %}" class="btn btn-secondary">Annuler</a>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    {% endblock %}
+{% else %}
+    Vous devez être connecté pour accéder à cette page. <a href="">Se connecter</a>.
+{% endif %}

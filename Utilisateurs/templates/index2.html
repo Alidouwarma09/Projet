@@ -1,0 +1,116 @@
+
+{% extends 'base.html' %}
+{% if user.is_authenticated %}
+{% load static %}
+{% block content%}
+<body class="hold-transition dark-mode sidebar-mini layout-fixed layout-navbar-fixed layout-footer-fixed">
+    {% include 'nav.html' %}
+<div class="wrapper">
+  <div class="content-wrapper">
+    <div class="content-header">
+      <div class="container-fluid">
+        <div class="row mb-2">
+          <div class="col-sm-6">
+            <h1 class="m-0">Dashboard v2</h1>
+          </div>
+          <div class="col-sm-6">
+            <ol class="breadcrumb float-sm-right">
+              <li class="breadcrumb-item"><a href="#">Home</a></li>
+              <li class="breadcrumb-item active">Dashboard v2</li>
+            </ol>
+          </div>
+        </div>
+      </div>
+    </div>
+    <section class="content">
+      <div class="container-fluid">
+        <div class="row">
+          <!-- Left col -->
+          <div class="col-md-8">
+            <div class="row">
+              <div class="col-md-6">
+                <!-- DIRECT CHAT -->
+                <div class="card direct-chat direct-chat-warning">
+                  <div class="card-header">
+                    <h3 class="card-title">Conversation avec (Nom de l'utilisateurs qui recois le message)</h3>
+
+                    <div class="card-tools">
+                      <span title="3 New Messages" class="badge badge-warning">3</span>
+                      <button type="button" class="btn btn-tool" data-card-widget="collapse">
+                        <i class="fas fa-minus"></i>
+                      </button>
+                      <button type="button" class="btn btn-tool" title="Contacts" data-widget="chat-pane-toggle">
+                        <i class="fas fa-comments"></i>
+                      </button>
+                      <button type="button" class="btn btn-tool" data-card-widget="remove">
+                        <i class="fas fa-times"></i>
+                      </button>
+                    </div>
+                  </div>
+                  <!-- /.card-header -->
+                  <div class="card-body">
+                    <!-- Conversations are loaded here -->
+                    <div class="direct-chat-messages">
+                      <!-- Message. Default to the left -->
+                      <div class="direct-chat-msg">
+                        <div class="direct-chat-infos clearfix">
+                          <span class="direct-chat-name float-left">Nom de l'utilisateurs qui recois le message</span>
+                          <span class="direct-chat-timestamp float-right">23 Jan 2:00 pm</span>
+                        </div>
+                        <!-- /.direct-chat-infos -->
+                        <img class="direct-chat-img" src="dist/img/user1-128x128.jpg" alt="message user image">
+                        <!-- /.direct-chat-img -->
+                        <div class="direct-chat-text">
+                            message de l'utilisateurs qui recois le message
+                        </div>
+                        <!-- /.direct-chat-text -->
+                      </div>
+                      <!-- /.direct-chat-msg -->
+
+                      <!-- Message to the right -->
+                      <div class="direct-chat-msg right">
+                        <div class="direct-chat-infos clearfix">
+                          <span class="direct-chat-name float-right">Nom de l'utilisateurs qui envoi le message</span>
+                          <span class="direct-chat-timestamp float-left">23 Jan 2:05 pm</span>
+                        </div>
+                        <!-- /.direct-chat-infos -->
+                        <img class="direct-chat-img" src="dist/img/user3-128x128.jpg" alt="message user image">
+                        <!-- /.direct-chat-img -->
+                        <div class="direct-chat-text">
+                            message de l'utilisateurs qui envoi le message
+                        </div>
+                        <!-- /.direct-chat-text -->
+                      </div>
+                    <!-- /.direct-chat-pane -->
+                  </div>
+                  <!-- /.card-body -->
+                  <div class="card-footer">
+                    <form action="#" method="post">
+                      <div class="input-group">
+                        <input type="text" name="message" placeholder="Type Message ..." class="form-control">
+                        <span class="input-group-append">
+                          <button type="button" class="btn btn-warning">Envoyer</button>
+                        </span>
+                      </div>
+                    </form>
+                  </div>
+                  <!-- /.card-footer-->
+                </div>
+                <!--/.direct-chat -->
+              </div>
+              <!-- /.col -->
+            </div>
+            <!-- /.card -->
+          </div>
+          <!-- /.col -->
+        </div>
+      </div>
+    </section>
+  </div>
+  <aside class="control-sidebar control-sidebar-dark">
+  </aside>
+</div>
+{% endblock %}
+{% else %}
+Vous devez être connecté pour accéder à cette page. <a href="{% url 'utilisateurs:Connexion' %}">Se connecter</a>.
+{% endif %}

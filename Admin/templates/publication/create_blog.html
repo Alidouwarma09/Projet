@@ -1,0 +1,87 @@
+<!-- Admin/templates/user_list.html -->
+{% extends 'admin_base.html' %}
+{% if user.is_authenticated %}
+    {% load static %}
+    {% block content%}
+        <body class="hold-transition dark-mode sidebar-mini layout-fixed layout-navbar-fixed layout-footer-fixed">
+        <style>
+            .success-message {
+                background-color: #d4edda;
+                color: #155724;
+                padding: 10px;
+                margin-bottom: 10px;
+                border: 1px solid #c3e6cb;
+                border-radius: 5px;
+            }
+        </style>
+        {% include 'admin_nav.html' %}
+        <div class="wrapper">
+        <div class="wrapper">
+        <div class="content-wrapper">
+            <section class="content-header">
+                <div class="container-fluid">
+                    <div class="row mb-2">
+                        <div class="col-sm-6">
+                            <h1>Ajout d'un blog</h1>
+                        </div>
+                        <div class="col-sm-6">
+                            <ol class="breadcrumb float-sm-right">
+                                <li class="breadcrumb-item"><a href="#">Accueil</a></li>
+                                <li class="breadcrumb-item active">Faire une publication</li>
+                            </ol>
+                        </div>
+                    </div>
+                </div>
+            </section>
+<section class="content">
+    <form method="post" action="{% url 'admin:create' %}" enctype="multipart/form-data">
+        {% csrf_token %}
+        <div class="row">
+            <div class="col-md-6">
+                <div class="card card-primary">
+                    <div class="card-header">
+                        <h3 class="card-title">Publication</h3>
+
+                        <div class="card-tools">
+                            <button type="button" class="btn btn-tool" data-card-widget="collapse" title="Collapse">
+                                <i class="fas fa-minus"></i>
+                            </button>
+                        </div>
+                    </div>
+                    <div class="card-body">
+                        <div class="form-group">
+                            <label for="id_title">Titre</label>
+                            <input type="text" id="id_title" name="title" class="form-control">
+                        </div>
+                        <div class="form-group">
+                            <label for="id_content">Contenu</label>
+                            <textarea id="id_content" name="content" class="form-control" rows="4"></textarea>
+                        </div>
+                        <div class="form-group">
+                            <label for="id_image">Image</label>
+                            <div class="input-group">
+                                <div class="custom-file">
+                                    <input type="file" name="image" class="custom-file-input" id="id_image">
+                                    <label class="custom-file-label" for="id_image">Choisir une image</label>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- /.card-body -->
+                </div>
+                <!-- /.card -->
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-12">
+                <button type="submit" class="btn btn-success">Publier</button>
+            </div>
+        </div>
+    </form>
+
+</section>
+    </div>
+{% endblock %}
+{% else %}
+    Vous devez être connecté pour accéder à cette page. <a href="">Se connecter</a>.
+{% endif %}

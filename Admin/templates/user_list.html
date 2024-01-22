@@ -1,0 +1,162 @@
+<!-- Admin/templates/user_list.html -->
+{% extends 'admin_base.html' %}
+{% if user.is_authenticated %}
+    {% load static %}
+    {% block content%}
+        <body class="hold-transition dark-mode sidebar-mini layout-fixed layout-navbar-fixed layout-footer-fixed">
+        <style>
+            .success-message {
+                background-color: #d4edda;
+                color: #155724;
+                padding: 10px;
+                margin-bottom: 10px;
+                border: 1px solid #c3e6cb;
+                border-radius: 5px;
+            }
+            .card.online {
+                border: 2px solid #28a745;
+            }
+
+            .card.offline {
+                border: 2px solid #dc3545;
+            }
+
+            .status-online {
+                color: #28a745;
+            }
+
+            .status-offline {
+                color: #dc3545;
+            }
+
+        </style>
+        {% include 'admin_nav.html' %}
+        <div class="wrapper">
+            <div class="wrapper">
+                <div class="content-wrapper">
+                    <section class="content-header">
+                        <div class="container-fluid">
+                            <div class="row mb-2">
+                                <div class="col-sm-6">
+                                    <h1>Tout les utilisateurs</h1>
+                                    {% if messages %}
+                                    <div id="success-message" class="success-message" >
+
+                                            {{ messages }}
+
+
+                                    </div>
+                                    {% endif %}
+                                </div>
+                                <div class="col-sm-6">
+                                    <ol class="breadcrumb float-sm-right">
+                                        <li class="breadcrumb-item"><a href="#">Home</a></li>
+                                        <li class="breadcrumb-item active"> Profile des utilisateurs</li>
+                                    </ol>
+                                </div>
+                            </div>
+                        </div><!-- /.container-fluid -->
+                    </section>
+
+                    <!-- Main content -->
+                    <section class="content">
+                        <div class="container-fluid">
+                            {% if all_users %}
+                            <div class="row">
+                                {% for utilisateur in all_users %}
+                                    <div class="col-md-4 col-12">
+                                        <div class="card card-primary card-outline">
+                                            <div class="card-body box-profile">
+                                                <div class="text-center">
+                                                    {% if utilisateur.photo %}
+                                                        <img class="profile-user-img img-fluid img-circle"
+                                                             src="{{ utilisateur.photo.url }}"
+                                                             alt="User profile picture">
+                                                        {% if utilisateur.is_active == True %}
+                                                            <span class="text-success">Compte Actif</span>
+                                                        {% else %}
+                                                            <i class="fas fa-ban text-danger" disabled></i> Compte désactivé
+                                                        {% endif %}
+                                                    {% else %}
+                                                        <img class="profile-user-img img-fluid img-circle" src="{% static 'images/user4-128x128.jpg' %}" alt="Default profile picture">
+                                                        {% if utilisateur.is_active == True %}
+                                                            <span class="text-success">Compte Actif</span>
+                                                        {% else %}
+                                                            <i class="fas fa-ban text-danger" disabled></i> Compte désactivé
+                                                        {% endif %}
+
+                                                    {% endif %}
+                                                </div>
+
+                                                <h3 class="profile-username text-center">{{ utilisateur.nom }} {{ utilisateur.prenom }}</h3>
+
+                                                <p class="text-muted text-center">{{ utilisateur.username }}</p>
+                                                {% if utilisateur.is_online %}
+                                                    <span class="status-online">En ligne<span style="font-size: 50px; color:#588113">.</span></span>
+                                                {% else %}
+                                                    {% if utilisateur.is_active == True %}
+                                                    <span class="status-offline">{{ utilisateur.time_since_last_logout }}</span>
+                                                    {% else %}
+                                                    {% endif %}
+                                                {% endif %}
+
+                                                {% if utilisateur.is_active == False %}
+                                                    <form method="post" action="{% url 'admin:active_utilisateur' utilisateur.id %}">
+                                                        {% csrf_token %}
+                                                        <button type="submit" class="btn btn-success" {% if utilisateur.is_active == True %}disabled{% endif %}>
+                                                            <i class="fas fa-check-circle"></i> Activer
+                                                        </button>
+                                                    </form>
+                                                {% else %}
+                                                    <form method="post" action="{% url 'admin:desactive_utilisateur' utilisateur.id %}">
+                                                        {% csrf_token %}
+                                                        <button type="submit" class="btn btn-danger" {% if utilisateur.is_active == False %}disabled{% endif %}>
+                                                            <i class="fas fa-times-circle"></i> Désactiver
+                                                        </button>
+                                                    </form>
+                                                {% endif %}
+
+
+
+
+                                                <ul class="list-group list-group-unbordered mb-3">
+                                                    <li class="list-group-item">
+                                                        <b>Followers</b> <a class="float-right">1,322</a>
+                                                    </li>
+                                                    <li class="list-group-item">
+                                                        <b>Following</b> <a class="float-right">543</a>
+                                                    </li>
+                                                    <li class="list-group-item">
+                                                        <b>Friends</b> <a class="float-right">13,287</a>
+                                                    </li>
+                                                </ul>
+
+                                                <a href="" class="btn btn-primary btn-block"><b>Mettre les informations a jour</b></a>
+                                                <a href="{% url 'admin:admin_delete_user' utilisateur.id %}" class="btn btn-danger btn-block"><b>Supprimer</b></a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                {% endfor %}
+                            </div>
+                            {% else %}
+                                <p>Aucun utilisateur n'est disponible.</p>
+                            {% endif %}
+                        </div>
+                    </section>
+                </div>
+            </div>
+
+        </div>
+        <script>
+            // JavaScript to hide the success message after 3 seconds
+            document.addEventListener('DOMContentLoaded', function() {
+                setTimeout(function() {
+                    document.getElementById('success-message').style.display = 'none';
+                }, 3000);
+            });
+        </script>
+
+    {% endblock %}
+{% else %}
+Vous devez être connecté pour accéder à cette page. <a href="">Se connecter</a>.
+{% endif %}

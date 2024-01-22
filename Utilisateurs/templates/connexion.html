@@ -1,0 +1,74 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="{% static 'assets/css/style.css'%}" />
+    <link href="https://unpkg.com/boxicons@2.0.9/css/boxicons.min.css" rel="stylesheet" />
+    <title>Login</title>
+    <style>
+        .error {
+            border: 1px solid red;
+            background-color: #ffdddd;
+        }
+        .error-message {
+            color: red;
+            font-size: 14px;
+            margin-top: 5px;
+        }
+        .login__button{
+            text-align: center;
+            margin-left: auto;
+            margin-right: auto;
+            border: none;
+            width: 100%;
+        }
+        .login__forms:hover{
+            transform: scale(1.05);
+        }
+    </style>
+</head>
+<body>
+
+<div class="login">
+    <div class="login__content">
+        <div class="login__img">
+            <img src="{% static 'assets/img/img-login.svg'%}" alt="Login" />
+        </div>
+
+        <div class="login__forms">
+            <form method="post" class="login__registre" id="login-in">
+
+                {% csrf_token %}
+                <h1 class="login__title">Connexion</h1>
+
+                <div class="login__box">
+                    <i class="bx bx-user login__icon"></i>
+                    {{ form.username }}
+                </div>
+
+                <div class="login__box">
+                    <i class="bx bx-lock login__icon"></i>
+                    {{ form.password }}
+                </div>
+
+                <a href="" class="login__forgot">Mot de passe oublié ?</a>
+                <button type="submit" name="submit" class="login__button">Se connecter</button>
+
+                <div>
+                    <span class="login__account">Vous n'avez pas de compte ?</span>
+                    <span class="login__signin" id="sign-up"><a href="{% url 'utilisateurs:inscription'%}">Créer un compte</a></span>
+                </div>
+            </form>
+
+        </div>
+    </div>
+</div>
+
+<script src="{% static 'assets/js/main.js' %}"></script>
+
+</body>
+</html>

@@ -1,0 +1,98 @@
+<!-- Admin/templates/user_list.html -->
+{% extends 'admin_base.html' %}
+{% if user.is_authenticated %}
+    {% load static %}
+    {% block content%}
+        <body class="hold-transition dark-mode sidebar-mini layout-fixed layout-navbar-fixed layout-footer-fixed">
+        {% include 'admin_nav.html' %}
+        <div class="wrapper">
+            <div class="wrapper">
+                <div class="content-wrapper">
+                    <section class="content-header">
+                        <div class="container-fluid">
+                            <div class="row mb-2">
+                                <div class="col-sm-6">
+                                    <h1>Tout les utilisateurs</h1>
+                                    <div id="success-message" class="success-message" >
+                                        {% for message in messages %}
+                                            {{ message }}
+                                        {% endfor %}
+
+                                    </div>
+                                </div>
+                                <div class="col-sm-6">
+                                    <ol class="breadcrumb float-sm-right">
+                                        <li class="breadcrumb-item"><a href="#">Home</a></li>
+                                        <li class="breadcrumb-item active"> Profile des utilisateurs</li>
+                                    </ol>
+                                </div>
+                            </div>
+                        </div><!-- /.container-fluid -->
+                    </section>
+
+                    <!-- Main content -->
+                    <section class="content">
+                        <div class="container-fluid">
+                            {% if all_users %}
+                                <div class="row">
+                                    {% for utilisateur in all_users %}
+                                        <div class="col-md-4 col-12">
+                                            <div class="card card-primary card-outline">
+                                                <div class="card-body box-profile">
+                                                    <div class="text-center">
+                                                        {% if utilisateur.photo %}
+                                                            <img class="profile-user-img img-fluid img-circle"
+                                                                 src="{{ utilisateur.photo.url }}"
+                                                                 alt="User profile picture">
+                                                        {% else %}
+                                                            <img class="profile-user-img img-fluid img-circle"
+                                                                 src="{% static 'images/user4-128x128.jpg' %}"
+                                                                 alt="Default profile picture">
+                                                        {% endif %}
+                                                    </div>
+
+                                                    <h3 class="profile-username text-center">{{ utilisateur.nom }} {{ utilisateur.prenom }}</h3>
+
+                                                    <p class="text-muted text-center">{{ utilisateur.username }}</p>
+                                                    {% if utilisateur.is_online %}
+                                                        <span class="status-online">En ligne<span style="font-size: 60px; color:#588113">.</span></span>
+                                                    {% else %}
+                                                        <span class="status-offline">{{ utilisateur.time_since_last_logout }}</span>
+                                                    {% endif %}
+
+
+
+                                                    <ul class="list-group list-group-unbordered mb-3">
+                                                        <li class="list-group-item">
+                                                            <b>Followers</b> <a class="float-right">1,322</a>
+                                                        </li>
+                                                        <li class="list-group-item">
+                                                            <b>Following</b> <a class="float-right">543</a>
+                                                        </li>
+                                                        <li class="list-group-item">
+                                                            <b>Friends</b> <a class="float-right">13,287</a>
+                                                        </li>
+                                                    </ul>
+                                                    <a href="{% url 'admin:messages' utilisateur.id %}" class="btn btn-primary btn-block">
+                                                        <b>Messages</b> {% if utilisateur.unread_messages > 0 %}(<span style="color: red; font-size:25px">{{ utilisateur.unread_messages }}</span>){% endif %}
+                                                    </a>
+
+                                                </div>
+                                            </div>
+                                        </div>
+                                    {% endfor %}
+                                </div>
+                            {% else %}
+                                <p>Aucun utilisateur n'est disponible.</p>
+                            {% endif %}
+                        </div>
+                    </section>
+                </div>
+            </div>
+
+        </div>
+
+    {% endblock %}
+{% else %}
+Vous devez être connecté pour accéder à cette page. <a href="">Se connecter</a>.
+{% endif %}
