@@ -62,7 +62,8 @@ TEMPLATES = [
         'DIRS': [
             os.path.join(BASE_DIR, 'templates'),
             os.path.join(BASE_DIR, 'Utilisateurs/templates'),
-            os.path.join(BASE_DIR, 'Admin/templates'),  # Assurez-vous que ce chemin est correct
+            os.path.join(BASE_DIR, 'Admin/templates'),
+            os.path.join(BASE_DIR, 'Site/templates'),
         ],
         'APP_DIRS': True,
         'OPTIONS': {

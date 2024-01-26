@@ -15,5 +15,4 @@ urlpatterns = [
     path('api/users/', CustomUserListView.as_view(), name='user-list'),
     path('api/inscription/', UserRegistrationView.as_view(), name='inscription_react'),
     path('api/messages/', message_list, name='message-list'),
-Q
 ]
