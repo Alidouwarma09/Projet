@@ -7,7 +7,6 @@
     <div class="wrapper">
         <div class="wrapper">
             <div class="content-wrapper">
-                <!-- Content Header (Page header) -->
                 <section class="content-header">
                     <div class="container-fluid">
                         <div class="row mb-2">
@@ -21,11 +20,103 @@
                                 </ol>
                             </div>
                         </div>
-                    </div><!-- /.container-fluid -->
+                    </div>
                 </section>
-                <section class="content">
+                {% block css %}
+                    <style>
+                        .card {
+                            margin-bottom: 20px;
+                            border: 1px solid #ddd;
+                            border-radius: 5px;
+                            overflow: hidden;
+                        }
 
-                    <!-- Default box -->
+                        .card-header {
+                            background-color: #f8f9fa;
+                            padding: 10px 15px;
+                            border-bottom: 1px solid #ddd;
+                            display: flex;
+                            justify-content: space-between;
+                            align-items: center;
+                        }
+
+                        .card-body {
+                            padding: 20px;
+                        }
+
+                        .card-body dl {
+                            margin: 0;
+                        }
+
+                        .card-body dl dt {
+                            font-weight: bold;
+                        }
+
+                        .card-body dl dd {
+                            margin-left: 0;
+                        }
+
+                        .card-body img {
+                            max-width: 100%;
+                            height: auto;
+                            margin-top: 10px;
+                            border-radius: 5px;
+                        }
+
+                        .text-right {
+                            margin-top: 15px;
+                        }
+
+                        .modal-content {
+                            border: 1px solid #ddd;
+                            border-radius: 5px;
+                            overflow: hidden;
+                        }
+
+                        .modal-header {
+                            background-color: #f8f9fa;
+                            padding: 10px 15px;
+                            border-bottom: 1px solid #ddd;
+                            display: flex;
+                            justify-content: space-between;
+                            align-items: center;
+                        }
+
+                        .modal-body {
+                            padding: 20px;
+                        }
+
+                        .form-group {
+                            margin-bottom: 20px;
+                        }
+
+                        .form-group label {
+                            font-weight: bold;
+                        }
+
+                        .form-control {
+                            width: 100%;
+                            padding: 10px;
+                            border: 1px solid #ddd;
+                            border-radius: 5px;
+                        }
+
+                        .btn-primary {
+                            background-color: #007bff;
+                            color: #fff;
+                            border: none;
+                            padding: 10px 15px;
+                            border-radius: 5px;
+                            cursor: pointer;
+                        }
+
+                        .btn-primary:hover {
+                            background-color: #0056b3;
+                        }
+                    </style>
+
+                {% endblock %}
+                <section class="content">
                     {% for site_info in info_du_site %}
                         <div class="card">
                             <div class="card-header">
@@ -58,7 +149,7 @@
 
                                     <dt class="col-sm-3">Image d'accueil</dt>
                                     <dd class="col-sm-9">
-                                        <img alt="Image d'accueil" src="" style="max-width: 100%">
+                                        <img alt="Image d'accueil" src="{{ site_info.homepage_image.url }}" style="max-width: 10%">
                                     </dd>
 
                                     <dt class="col-sm-3">Nombre de visiteurs</dt>
@@ -70,7 +161,6 @@
                                 </dl>
 
                                 <div class="text-right">
-                                    <!-- Bouton pour ouvrir le modal de modification -->
                                     <button type="button" class="btn btn-info" data-toggle="modal" data-target="#modifierModal{{ forloop.counter }}">
                                         <i class="fas fa-pencil-alt"></i>
                                         Modifier
@@ -91,26 +181,23 @@
                                     </div>
                                     <div class="modal-body">
                                         <!-- Formulaire de modification -->
-                                        <form method="post" action="{% url 'admin:modifier_parametres' pk=site_info.pk %}">
+                                        <form method="post" action="{% url 'admin:modifier_parametres' pk=site_info.pk %}" enctype="multipart/form-data">
                                         {% csrf_token %}
                                             <!-- Ajoutez des champs de formulaire pour chaque propriété du modèle SiteParameters -->
                                             <div class="form-group">
                                                 <label for="nom_orphelinat">Nom de l'orphelinat</label>
-                                                <input type="text" class="form-control" id="nom_orphelinat" name="nom_orphelinat" value="{{ site_info.orphanage_name }}">
+                                                <input type="text" class="form-control" id="nom_orphelinat" name="orphanage_name" value="{{ site_info.orphanage_name }}">
                                                 <label for="nom_orphelinat">Adresse de l'orphelinat</label>
-                                                <input type="text" class="form-control" id="nom_orphelinat" name="nom_orphelinat" value="{{ site_info.orphanage_name }}">
+                                                <input type="text" class="form-control" id="nom_orphelinat" name="address" value="{{ site_info.address }}">
                                                 <label for="nom_orphelinat">Numéro de téléphone</label>
-                                                <input type="text" class="form-control" id="nom_orphelinat" name="nom_orphelinat" value="{{ site_info.orphanage_name }}">
-                                                <label for="nom_orphelinat">Nom de l'orphelinat</label>
-                                                <input type="text" class="form-control" id="nom_orphelinat" name="nom_orphelinat" value="{{ site_info.orphanage_name }}">
-                                                <label for="nom_orphelinat">Nom de l'orphelinat</label>
-                                                <input type="text" class="form-control" id="nom_orphelinat" name="nom_orphelinat" value="{{ site_info.orphanage_name }}">
-                                                <label for="nom_orphelinat">Nom de l'orphelinat</label>
-                                                <input type="text" class="form-control" id="nom_orphelinat" name="nom_orphelinat" value="{{ site_info.orphanage_name }}">
-
+                                                <input type="text" class="form-control" id="nom_orphelinat" name="phone_number" value="{{ site_info.phone_number }}">
+                                                <label for="nom_orphelinat">Heures d'ouverture</label>
+                                                <input type="text" class="form-control" id="nom_orphelinat" name="opening_hours" value="{{ site_info.opening_hours}}">
+                                                <label for="nom_orphelinat">À propos de nous</label>
+                                                <input type="text" class="form-control" id="nom_orphelinat" name="about_us" value="{{ site_info.about_us }}">
+                                                <label for="nom_orphelinat">Image d'accueil</label>
+                                                <input type="file" class="form-control" id="homepage_image" name="homepage_image">
                                             </div>
-                                            <!-- Ajoutez d'autres champs de formulaire ici... -->
-
                                             <button type="submit" class="btn btn-primary">Enregistrer</button>
                                         </form>
                                     </div>

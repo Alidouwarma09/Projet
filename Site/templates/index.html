@@ -3,8 +3,9 @@
 {% load static %}
 {% block content%}
 {% include 'site_nav.html' %}
+    {% for info_du_site in info_du_site %}
     <header class="header-2">
-        <div class="page-header min-vh-75 relative" style="background-image: url('{% static 'assets/img/bg2.jpg' %}')">
+        <div class="page-header min-vh-75 relative" style="background-image: url('{{ info_du_site.homepage_image.url }}')">
             <span class="mask bg-gradient-primary opacity-4"></span>
             <div class="container">
                 <div class="row">
@@ -16,6 +17,7 @@
             </div>
         </div>
     </header>
+    {% endfor %}
     <div class="card card-body blur shadow-blur mx-3 mx-md-4 mt-n6">
 
         <section class="pt-3 pb-4" id="count-stats">

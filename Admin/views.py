@@ -216,14 +216,18 @@ def Info_du_site(request):
                   {'info_du_site': info_du_site, 'total_visitors': total_visitors})
 
 
+@login_required(login_url='utilisateurs:connexion')
 def modifier_parametres(request, pk):
     site_info = SiteParameters.objects.get(pk=pk)
 
     if request.method == 'POST':
-        form = SiteParametersForm(request.POST, instance=site_info)
+        form = SiteParametersForm(request.POST, request.FILES, instance=site_info)
         if form.is_valid():
             form.save()
+            print("Success")
             return redirect('admin:info_du_site')
+        else:
+            print("Error", form.errors)
     else:
         form = SiteParametersForm(instance=site_info)
 
