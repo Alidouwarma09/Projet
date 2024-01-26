@@ -6,39 +6,54 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700|Roboto+Slab:400,700|Material+Icons" />
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/latest/css/font-awesome.min.css">
-    <link rel="stylesheet" href="{% static 'assets/css/bootstrap.min.css' %}" integrity="sha384-TXQ8QX0ip9q1mpH6e5n8ERpu1Cszl1LUtcazItN/tFv1EqnN/p2lgjIsNJoLgi"
-          crossorigin="anonymous">
+    <link rel="stylesheet" href="{% static 'assets/css/bootstrap.min.css' %}" integrity="sha384-TXQ8QX0ip9q1mpH6e5n8ERpu1Cszl1LUtcazItN/tFv1EqnN/p2lgjIsNJoLgi" crossorigin="anonymous">
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons+Round" rel="stylesheet">
+    <link rel="stylesheet" href="{% static 'assets/css/bootstrap.min.css' %}">
     <link href="{% static 'assets/css/materialkit2.css' %}" rel="stylesheet" />
     <link href="{% static 'assets/css/material-kit.min.css' %}" rel="stylesheet" />
     <link rel="stylesheet" href="{% static 'assets/css/nucleo-icons.css' %}">
     <link rel="stylesheet" href="{% static 'assets/css/nucleo-svg.css' %}">
-    <link rel="stylesheet" href="{% static 'assets/css/bootstrap.min.css' %}">
+    <link rel="stylesheet" href="{% static 'assets/css/fontawesome.min.css' %}">
+    <script defer data-site="YOUR_DOMAIN_HERE" src="https://api.nepcha.com/js/nepcha-analytics.js"></script>
+    <script src="https://kit.fontawesome.com/42d5adcbca.js" crossorigin="anonymous"></script>
+    <script defer data-site="YOUR_DOMAIN_HERE" src="https://api.nepcha.com/js/nepcha-analytics.js"></script>
 
     {% block css %}
     {% endblock %}
 </head>
-<body>
+<body  class="index-page bg-gray-200">
 
 {% block content %}
 {% endblock %}
 
 
-<script src="{% static 'js/bootstrap.bundle.min.js' %}"></script>
-<script src="{% static 'js/bootstrap.min.js' %}"></script>
-<script src="{% static 'js/popper.min.js' %}"></script>
-<script src="{% static 'js/plugins/choices.min.js' %}"></script>
-<script src="{% static 'js/plugins/countup.min.js' %}"></script>
-<script src="{% static 'js/plugins/flatpickr.min.js' %}"></script>
-<script src="{% static 'js/plugins/highlight.min.js' %}"></script>
-<script src="{% static 'js/plugins/moment.min.js' %}"></script>
-<script src="{% static 'js/plugins/parallax.min.js' %}"></script>
-<script src="{% static 'js/plugins/perfect-scrollbar.min.js' %}"></script>
-<script src="{% static 'js/plugins/prism.min.js' %}"></script>
-<script src="{% static 'js/plugins/rellax.min.js' %}"></script>
-<script src="{% static 'js/plugins/tilt.min.js' %}"></script>
-<script src="{% static 'js/plugins/typedjs.js' %}"></script>
+<script src="{% static 'assets/js/plugins/choices.min.js' %}"></script>
+<script src="{% static 'assets/js/plugins/countup.min.js' %}"></script>
+<script src="{% static 'assets/js/plugins/flatpickr.min.js' %}"></script>
+<script src="{% static 'assets/js/plugins/highlight.min.js' %}"></script>
+<script src="{% static 'assets/js/plugins/moment.min.js' %}"></script>
+<script src="{% static 'assets/js/plugins/parallax.min.js' %}"></script>
+<script src="{% static 'assets/js/plugins/perfect-scrollbar.min.js' %}"></script>
+<script src="{% static 'assets/js/plugins/prism.min.js' %}"></script>
+<script src="{% static 'assets/js/plugins/rellax.min.js' %}"></script>
+<script src="{% static 'assets/js/plugins/tilt.min.js' %}"></script>
+<script src="{% static 'assets/js/plugins/typedjs.js' %}"></script>
+<script src="{% static 'assets/js/materialkit1.js' %}"></script>
+<script src="{% static 'assets/js/materialkit.min.js' %}"></script>
+<script src="{% static 'assets/js/jquery.min.js' %}"></script>
+<script src="{% static 'assets/js/popper.min.js' %}"></script>
+<script src="{% static 'assets/js/bootstrap/bootstrap.bundle.min.js' %}"></script>
+<script src="{% static 'assets/js/bootstrap/bootstrap.min.js' %}"></script>
+
+<script>
+    $(document).ready(function () {
+        // Initialisez les composants Bootstrap
+        $('[data-bs-toggle="popover"]').popover();
+        $('[data-bs-toggle="tooltip"]').tooltip();
+        // Ajoutez une initialisation similaire pour d'autres composants Bootstrap si nécessaire
+    });
+</script>
+
 
 </body>
 </html>

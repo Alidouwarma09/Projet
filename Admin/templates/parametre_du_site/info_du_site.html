@@ -1,0 +1,124 @@
+<!-- Admin/templates/dashboard.html -->
+{% extends 'admin_base.html' %}
+{% load static %}
+{% block content %}
+    <body class="hold-transition dark-mode sidebar-mini layout-fixed layout-navbar-fixed layout-footer-fixed">
+    {% include 'admin_nav.html' %}
+    <div class="wrapper">
+        <div class="wrapper">
+            <div class="content-wrapper">
+                <!-- Content Header (Page header) -->
+                <section class="content-header">
+                    <div class="container-fluid">
+                        <div class="row mb-2">
+                            <div class="col-sm-6">
+                                <h1>Tous les postes</h1>
+                            </div>
+                            <div class="col-sm-6">
+                                <ol class="breadcrumb float-sm-right">
+                                    <li class="breadcrumb-item"><a href="#">Accueil</a></li>
+                                    <li class="breadcrumb-item active">Tout les postes</li>
+                                </ol>
+                            </div>
+                        </div>
+                    </div><!-- /.container-fluid -->
+                </section>
+                <section class="content">
+
+                    <!-- Default box -->
+                    {% for site_info in info_du_site %}
+                        <div class="card">
+                            <div class="card-header">
+                                <h3 class="card-title">Paramètres du site</h3>
+                                <div class="card-tools">
+                                    <button type="button" class="btn btn-tool" data-card-widget="collapse" title="Collapse">
+                                        <i class="fas fa-minus"></i>
+                                    </button>
+                                    <button type="button" class="btn btn-tool" data-card-widget="remove" title="Remove">
+                                        <i class="fas fa-times"></i>
+                                    </button>
+                                </div>
+                            </div>
+                            <div class="card-body">
+                                <dl class="row">
+                                    <dt class="col-sm-3">Nom de l'orphelinat</dt>
+                                    <dd class="col-sm-9">{{ site_info.orphanage_name }}</dd>
+
+                                    <dt class="col-sm-3">Adresse de l'orphelinat</dt>
+                                    <dd class="col-sm-9">{{ site_info.address }}</dd>
+
+                                    <dt class="col-sm-3">Numéro de téléphone</dt>
+                                    <dd class="col-sm-9">{{ site_info.phone_number }}</dd>
+
+                                    <dt class="col-sm-3">Heures d'ouverture</dt>
+                                    <dd class="col-sm-9">{{ site_info.opening_hours }}</dd>
+
+                                    <dt class="col-sm-3">À propos de nous</dt>
+                                    <dd class="col-sm-9">{{ site_info.about_us }}</dd>
+
+                                    <dt class="col-sm-3">Image d'accueil</dt>
+                                    <dd class="col-sm-9">
+                                        <img alt="Image d'accueil" src="" style="max-width: 100%">
+                                    </dd>
+
+                                    <dt class="col-sm-3">Nombre de visiteurs</dt>
+                                    <dd class="col-sm-9">
+                                        <div class="progress">
+                                            <div class="progress-bar bg-success" role="progressbar" style="width: {{ total_visitors }}%" aria-valuenow="{{ total_visitors }}" aria-valuemin="0" aria-valuemax="100">{{ total_visitors }}%</div>
+                                        </div>
+                                    </dd>
+                                </dl>
+
+                                <div class="text-right">
+                                    <!-- Bouton pour ouvrir le modal de modification -->
+                                    <button type="button" class="btn btn-info" data-toggle="modal" data-target="#modifierModal{{ forloop.counter }}">
+                                        <i class="fas fa-pencil-alt"></i>
+                                        Modifier
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Modal de modification -->
+                        <div class="modal fade" id="modifierModal{{ forloop.counter }}" tabindex="-1" role="dialog" aria-labelledby="modifierModalLabel{{ forloop.counter }}" aria-hidden="true">
+                            <div class="modal-dialog" role="document">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h5 class="modal-title" id="modifierModalLabel{{ forloop.counter }}">Modifier les paramètres du site</h5>
+                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                            <span aria-hidden="true">&times;</span>
+                                        </button>
+                                    </div>
+                                    <div class="modal-body">
+                                        <!-- Formulaire de modification -->
+                                        <form method="post" action="{% url 'admin:modifier_parametres' pk=site_info.pk %}">
+                                        {% csrf_token %}
+                                            <!-- Ajoutez des champs de formulaire pour chaque propriété du modèle SiteParameters -->
+                                            <div class="form-group">
+                                                <label for="nom_orphelinat">Nom de l'orphelinat</label>
+                                                <input type="text" class="form-control" id="nom_orphelinat" name="nom_orphelinat" value="{{ site_info.orphanage_name }}">
+                                                <label for="nom_orphelinat">Adresse de l'orphelinat</label>
+                                                <input type="text" class="form-control" id="nom_orphelinat" name="nom_orphelinat" value="{{ site_info.orphanage_name }}">
+                                                <label for="nom_orphelinat">Numéro de téléphone</label>
+                                                <input type="text" class="form-control" id="nom_orphelinat" name="nom_orphelinat" value="{{ site_info.orphanage_name }}">
+                                                <label for="nom_orphelinat">Nom de l'orphelinat</label>
+                                                <input type="text" class="form-control" id="nom_orphelinat" name="nom_orphelinat" value="{{ site_info.orphanage_name }}">
+                                                <label for="nom_orphelinat">Nom de l'orphelinat</label>
+                                                <input type="text" class="form-control" id="nom_orphelinat" name="nom_orphelinat" value="{{ site_info.orphanage_name }}">
+                                                <label for="nom_orphelinat">Nom de l'orphelinat</label>
+                                                <input type="text" class="form-control" id="nom_orphelinat" name="nom_orphelinat" value="{{ site_info.orphanage_name }}">
+
+                                            </div>
+                                            <!-- Ajoutez d'autres champs de formulaire ici... -->
+
+                                            <button type="submit" class="btn btn-primary">Enregistrer</button>
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    {% endfor %}
+
+                </section>
+
+{% endblock %}

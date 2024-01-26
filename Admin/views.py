@@ -5,12 +5,12 @@ from django.shortcuts import render, get_object_or_404, redirect
 from django.contrib.auth.decorators import login_required, user_passes_test
 from django.urls import reverse
 from django.views import View
-from rest_framework import viewsets
 
-import Utilisateurs
+from Site.forms import SiteParametersForm
 from Utilisateurs.models import CustomUser, Message, BlogPost
 from Utilisateurs.forms import UserRegistrationForm, MessageForm, BlogPostForm, DeactivateUserForm, ActivateUserForm
 from django.db.models import Q
+from Site.models import SiteParameters, Visitor
 
 
 @login_required(login_url='utilisateurs:connexion')
@@ -201,10 +201,30 @@ def active_utilisateur(request, utilisateur_id):
 @login_required
 def desactive_utilisateur(request, utilisateur_id):
     if request.method == 'POST':
-        utilisateur= get_object_or_404(CustomUser, id=utilisateur_id)
+        utilisateur = get_object_or_404(CustomUser, id=utilisateur_id)
         utilisateur.is_active = False
         utilisateur.save()
         print("deactive")
         return redirect('admin:tous_les_user')
 
 
+@login_required(login_url='utilisateurs:connexion')
+def Info_du_site(request):
+    info_du_site = SiteParameters.objects.all()
+    total_visitors = Visitor.objects.count()
+    return render(request, 'parametre_du_site/info_du_site.html',
+                  {'info_du_site': info_du_site, 'total_visitors': total_visitors})
+
+
+def modifier_parametres(request, pk):
+    site_info = SiteParameters.objects.get(pk=pk)
+
+    if request.method == 'POST':
+        form = SiteParametersForm(request.POST, instance=site_info)
+        if form.is_valid():
+            form.save()
+            return redirect('admin:info_du_site')
+    else:
+        form = SiteParametersForm(instance=site_info)
+
+    return render(request, 'parametre_du_site/info_du_site.html', {'form': form, 'site_info': site_info})

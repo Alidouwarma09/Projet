@@ -52,6 +52,7 @@ MIDDLEWARE = [
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
     'corsheaders.middleware.CorsMiddleware',
+    'Site.middleware.VisitorMiddleware'
 ]
 
 ROOT_URLCONF = 'Projet.urls'
@@ -135,7 +136,7 @@ ALLOWED_HOSTS = ['192.168.11.135', 'localhost', '127.0.0.1']
 # Internationalization
 # https://docs.djangoproject.com/en/4.2/topics/i18n/
 
-LANGUAGE_CODE = 'fr-fr'
+LANGUAGE_CODE = 'fr-FR'
 
 TIME_ZONE = 'GMT'
 DATE_FORMAT = 'd-m-Y'
