@@ -1,0 +1,44 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Hello, world!</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700|Roboto+Slab:400,700|Material+Icons" />
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/latest/css/font-awesome.min.css">
+    <link rel="stylesheet" href="{% static 'assets/css/bootstrap.min.css' %}" integrity="sha384-TXQ8QX0ip9q1mpH6e5n8ERpu1Cszl1LUtcazItN/tFv1EqnN/p2lgjIsNJoLgi"
+          crossorigin="anonymous">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons+Round" rel="stylesheet">
+    <link href="{% static 'assets/css/materialkit2.css' %}" rel="stylesheet" />
+    <link href="{% static 'assets/css/material-kit.min.css' %}" rel="stylesheet" />
+    <link rel="stylesheet" href="{% static 'assets/css/nucleo-icons.css' %}">
+    <link rel="stylesheet" href="{% static 'assets/css/nucleo-svg.css' %}">
+    <link rel="stylesheet" href="{% static 'assets/css/bootstrap.min.css' %}">
+
+    {% block css %}
+    {% endblock %}
+</head>
+<body>
+
+{% block content %}
+{% endblock %}
+
+
+<script src="{% static 'js/bootstrap.bundle.min.js' %}"></script>
+<script src="{% static 'js/bootstrap.min.js' %}"></script>
+<script src="{% static 'js/popper.min.js' %}"></script>
+<script src="{% static 'js/plugins/choices.min.js' %}"></script>
+<script src="{% static 'js/plugins/countup.min.js' %}"></script>
+<script src="{% static 'js/plugins/flatpickr.min.js' %}"></script>
+<script src="{% static 'js/plugins/highlight.min.js' %}"></script>
+<script src="{% static 'js/plugins/moment.min.js' %}"></script>
+<script src="{% static 'js/plugins/parallax.min.js' %}"></script>
+<script src="{% static 'js/plugins/perfect-scrollbar.min.js' %}"></script>
+<script src="{% static 'js/plugins/prism.min.js' %}"></script>
+<script src="{% static 'js/plugins/rellax.min.js' %}"></script>
+<script src="{% static 'js/plugins/tilt.min.js' %}"></script>
+<script src="{% static 'js/plugins/typedjs.js' %}"></script>
+
+</body>
+</html>
