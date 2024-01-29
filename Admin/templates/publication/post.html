@@ -39,7 +39,9 @@
                     </div>
                     <!-- /.card-header -->
                     <div class="card-body">
-                        <img class="img-fluid pad" src="{{ blog_posts.image.url }}" alt="Photo">
+                        <!-- post.html -->
+                        <img class="img-fluid pad" src="{% if blog_posts.has_image %}{{ blog_posts.image.url }}{% else %}URL_PAR_DEFAUT_SI_PAS_D_IMAGE{% endif %}" alt="Photo">
+
 
                         <div id="content{{ blog_posts.id }}" data-content="{{ blog_posts.content }}">
                             <p>{{ blog_posts.content|truncatewords:10 }}</p>

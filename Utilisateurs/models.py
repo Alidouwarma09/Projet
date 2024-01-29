@@ -86,6 +86,9 @@ class BlogPost(models.Model):
     image = models.ImageField(upload_to='blog_images/', null=True, blank=True)
     views = models.IntegerField(default=0)
 
+    def has_image(self):
+        return self.image and hasattr(self.image, 'url') and bool(self.image.url)
+
     def get_delete_url(self):
         return reverse('delete_post', args=[str(self.id)])
 
