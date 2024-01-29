@@ -2,6 +2,22 @@
 {% extends 'sitebase.html' %}
 {% load static %}
 {% block content%}
+    {% block css %}
+    <style>
+        .pub:hover {
+            transform: scale(1.05);
+        }
+
+        .card-header {
+            overflow: hidden;
+        }
+
+        .pub {
+            transition: transform 0.3s ease;
+        }
+    </style>
+
+{% endblock %}
 {% include 'site_nav.html' %}
     {% for info_du_site in info_du_site %}
     <header class="header-2">
@@ -24,36 +40,38 @@
             <div class="container">
                 <div class="row">
                     <div class="col-lg-6">
-                        <h3 class="mb-5">Check my latest blogposts</h3>
+                        <h3 class="mb-5">Nouvels articles</h3>
                     </div>
                 </div>
-                {% for publication in publication %}
-                <div class="row">
 
-                    <div class="col-lg-3 col-sm-6">
-                        <div class="card card-plain">
-                            <div class="card-header p-0 position-relative">
-                                <a class="d-block blur-shadow-image">
-                                    <img src="{{ publication.image.url}}" alt="img-blur-shadow" class="img-fluid shadow border-radius-lg" loading="lazy">
-                                </a>
-                            </div>
-                            <div class="card-body px-0">
-                                <h5>
-                                    <a href="javascript:;" class="text-dark font-weight-bold">{{ publication.title}}</a>
-                                </h5>
-                                <p>
-                                    {{ publication.content|truncatewords:20 }}
-                                </p>
-                                <a href="javascript:;" class="text-info text-sm icon-move-right">Lire plus
-                                    <i class="fas fa-arrow-right text-xs ms-1"></i>
-                                </a>
+                <div class="row flex-nowrap overflow-auto">
+                    {% for publication in publication %}
+                        <div class="col-lg-3 col-sm-6 mb-4" style="margin-bottom:200px">
+                            <div class="card card-plain">
+                                <div class="card-header p-0 position-relative">
+                                    <a class="d-block blur-shadow-image">
+                                        <img src="{{ publication.image.url }}" alt="img-blur-shadow" class="pub img-fluid shadow border-radius-lg" loading="lazy" style="max-width:500px;">
+                                    </a>
+                                </div>
+                                <div class="card-body px-0">
+                                    <h5>
+                                        <a href="javascript:;" class="text-dark font-weight-bold">{{ publication.title }}</a>
+                                    </h5>
+                                    <p>
+                                        {{ publication.content|truncatewords:20 }}
+                                    </p>
+                                    <a href="javascript:;" class="text-info text-sm icon-move-right">Lire plus
+                                        <i class="fas fa-arrow-right text-xs ms-1"></i>
+                                    </a>
+                                </div>
                             </div>
                         </div>
-                    </div>
+                    {% endfor %}
                 </div>
             </div>
         </section>
-        {% endfor %}
+
+
         <section class="pt-3 pb-4" id="count-stats">
             <div class="container">
                 <div class="row">

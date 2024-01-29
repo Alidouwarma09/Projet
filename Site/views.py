@@ -5,6 +5,6 @@ from Utilisateurs.models import BlogPost
 
 # Create your views here.
 def Index(request):
-    publication=BlogPost.objects.all()
+    publication = BlogPost.objects.all()
     info_du_site = SiteParameters.objects.all()
     return render(request, 'index.html', {'info_du_site': info_du_site, 'publication': publication})
