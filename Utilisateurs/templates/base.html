@@ -4,47 +4,92 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>AdminLTE 3 | Dashboard 2</title>
+    <title>Administrateur</title>
 
-    <!-- Google Font: Source Sans Pro -->
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
-    <!-- Font Awesome Icons -->
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-GLhlTQ8iK7l5l6UqfB3aaKUaef+OT2Em9uqD/hpa9i9eg6woeAah/1zrGOl5KPE" crossorigin="anonymous">
+
+    <!-- Font Awesome -->
     <link rel="stylesheet" href="{% static 'plugins/fontawesome-free/css/all.min.css' %}">
-    <!-- overlayScrollbars -->
+
+    <!-- OverlayScrollbars CSS -->
     <link rel="stylesheet" href="{% static 'plugins/overlayScrollbars/css/OverlayScrollbars.min.css' %}">
-    <!-- Theme style -->
+
+    <!-- AdminLTE CSS -->
     <link rel="stylesheet" href="{% static 'dist/css/adminlte.min.css' %}">
+
+    <!-- Custom CSS (if any) -->
     {% block css %}
     {% endblock %}
 </head>
+<body class="hold-transition dark-mode sidebar-mini layout-fixed layout-navbar-fixed layout-footer-fixed">
 
 {% block content %}
 {% endblock %}
 
-<!-- ./wrapper -->
+<!-- Popper.js -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
 
-<!-- REQUIRED SCRIPTS -->
-<!-- jQuery -->
+<!-- Bootstrap JS -->
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+
+<!-- jQuery (included in Bootstrap bundle) -->
 <script src="{% static 'plugins/jquery/jquery.min.js' %}"></script>
-<!-- Bootstrap -->
+
+<!-- Bootstrap bundle JS (includes Popper.js) -->
 <script src="{% static 'plugins/bootstrap/js/bootstrap.bundle.min.js' %}"></script>
-<!-- overlayScrollbars -->
+
+<!-- OverlayScrollbars JS -->
 <script src="{% static 'plugins/overlayScrollbars/js/jquery.overlayScrollbars.min.js' %}"></script>
-<!-- AdminLTE App -->
+
+<!-- AdminLTE JS -->
 <script src="{% static 'dist/js/adminlte.js' %}"></script>
 
-<!-- PAGE PLUGINS -->
-<!-- jQuery Mapael -->
+<!-- jQuery Mousewheel -->
 <script src="{% static 'plugins/jquery-mousewheel/jquery.mousewheel.js' %}"></script>
+
+<!-- Raphael JS -->
 <script src="{% static 'plugins/raphael/raphael.min.js' %}"></script>
+
+<!-- jQuery Mapael -->
 <script src="{% static 'plugins/jquery-mapael/jquery.mapael.min.js' %}"></script>
 <script src="{% static 'plugins/jquery-mapael/maps/usa_states.min.js' %}"></script>
-<!-- ChartJS -->
+
+<!-- Chart.js -->
 <script src="{% static 'plugins/chart.js/Chart.min.js' %}"></script>
 
-<!-- AdminLTE for demo purposes -->
+<!-- AdminLTE Demo JS -->
 <script src="{% static 'dist/js/demo.js' %}"></script>
-<!-- AdminLTE dashboard demo (This is only for demo purposes) -->
+
+<!-- AdminLTE Dashboard JS -->
 <script src="{% static 'dist/js/pages/dashboard2.js' %}"></script>
+
+<!-- jQuery (required for custom scripts) -->
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+<!-- Custom Script -->
+<script>
+    $(document).ready(function () {
+        // Fonction pour gérer le défilement
+        function handleScroll() {
+            var scroll = $(window).scrollTop();
+            var navbar = $(".navbar-nav");
+
+            // Si le défilement est supérieur à 100 pixels, ajoutez la classe "scrolling", sinon, retirez-la
+            if (scroll > 100) {
+                navbar.addClass("scrolling");
+            } else {
+                navbar.removeClass("scrolling");
+            }
+        }
+
+        // Attacher la fonction au défilement de la page
+        $(window).scroll(handleScroll);
+
+        // Appeler la fonction une fois au chargement de la page pour gérer l'état initial
+        handleScroll();
+    });
+</script>
+
 </body>
 </html>

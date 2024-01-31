@@ -1,10 +1,10 @@
 <!-- Admin/templates/user_list.html -->
-{% extends 'admin_base.html' %}
+{% extends 'base.html' %}
 {% if user.is_authenticated %}
     {% load static %}
     {% block content%}
         <body class="hold-transition dark-mode sidebar-mini layout-fixed layout-navbar-fixed layout-footer-fixed">
-        {% include 'admin_nav.html' %}
+        {% include 'nav.html' %}
         <div class="wrapper">
             <div class="wrapper">
                 <div class="content-wrapper">

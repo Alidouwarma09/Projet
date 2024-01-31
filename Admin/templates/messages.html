@@ -1,5 +1,5 @@
 
-{% extends 'admin_base.html' %}
+{% extends 'base.html' %}
 {% if user.is_authenticated %}
     {% load static %}
     {% block content%}
@@ -10,7 +10,7 @@
 
             }
         </style>
-        {% include 'admin_nav.html' %}
+        {% include 'nav.html' %}
         <div class="wrapper">
             <div class="content-wrapper">
                 <div class="content-header">

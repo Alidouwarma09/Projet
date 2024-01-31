@@ -1,3 +1,4 @@
+
 <nav class="main-header navbar navbar-expand navbar-dark">
     <!-- Left navbar links -->
     <ul class="navbar-nav">
@@ -127,8 +128,8 @@
             </a>
         </li>
         <li class="nav-item">
-            <a class="nav-link" data-widget="control-sidebar" data-slide="true" href="#" role="button">
-                <i class="fas fa-th-large"></i>
+            <a class="nav-link"  href="{% url 'admin:info_du_site' %}" >
+                <i class=" fa fa-cogs"></i>
             </a>
         </li>
     </ul>
@@ -175,13 +176,43 @@
         <nav class="mt-2">
             <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
                 <li class="nav-item">
-                    <a href="pages/widgets.html" class="nav-link">
+                    <a href="{% url 'admin:admin_dashboard'%}" class="nav-link">
                         <i class="nav-icon fas fa-th"></i>
                         <p>
-                            Widgets
+                            Accueil
                             <span class="right badge badge-danger">New</span>
                         </p>
                     </a>
+                </li>
+                <li class="nav-item">
+                    <a href="#" class="nav-link">
+                        <i class="nav-icon fas fa-table"></i>
+                        <p>
+                            Poste
+                            <i class="fas fa-angle-left right"></i>
+                        </p>
+                    </a>
+                    <ul class="nav nav-treeview">
+                        <!-- admin/templates/admin/layout/sidebar.html -->
+                        <li class="nav-item">
+                            <a href="{% url 'admin:post'%}" class="nav-link">
+                                <i class="far fa-circle nav-icon"></i>
+                                <p>Les blogs posté</p>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="{% url 'admin:All_Blog'%}" class="nav-link">
+                                <i class="far fa-circle nav-icon"></i>
+                                <p>Tout les blogs</p>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="{% url 'admin:create'%}" class="nav-link">
+                                <i class="far fa-circle nav-icon"></i>
+                                <p>Ajouter un post</p>
+                            </a>
+                        </li>
+                    </ul>
                 </li>
                 <li class="nav-item">
                     <a href="#" class="nav-link">
@@ -403,10 +434,10 @@
                 </li>
                 <li class="nav-header">EXAMPLES</li>
                 <li class="nav-item">
-                    <a href="pages/calendar.html" class="nav-link">
+                    <a href="{% url 'admin:utilisateur' %}" class="nav-link">
                         <i class="nav-icon fas fa-calendar-alt"></i>
                         <p>
-                            Calendar
+                            Utilisateurs
                             <span class="badge badge-info right">2</span>
                         </p>
                     </a>
@@ -460,27 +491,21 @@
                     <a href="#" class="nav-link">
                         <i class="nav-icon fas fa-book"></i>
                         <p>
-                            Pages
+                            Compte utilisateurs
                             <i class="fas fa-angle-left right"></i>
                         </p>
                     </a>
                     <ul class="nav nav-treeview">
                         <li class="nav-item">
-                            <a href="pages/examples/invoice.html" class="nav-link">
-                                <i class="far fa-circle nav-icon"></i>
-                                <p>Invoice</p>
+                            <a href="{% url 'admin:tous_les_user' %}" class="nav-link">
+                                <i class="far fa-user nav-icon"></i>
+                                <p>Tous les utilisateurs</p>
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a href="{% url 'utilisateurs:Profile' %}" class="nav-link">
+                            <a href="{% url 'admin:admin_create_user' %}" class="nav-link">
                                 <i class="far fa-circle nav-icon"></i>
-                                <p>Profile</p>
-                            </a>
-                        </li>
-                        <li class="nav-item">
-                            <a href="pages/examples/e-commerce.html" class="nav-link">
-                                <i class="far fa-circle nav-icon"></i>
-                                <p>E-commerce</p>
+                                <p>Ajouter un utilisateur</p>
                             </a>
                         </li>
                         <li class="nav-item">
@@ -782,3 +807,22 @@
     </div>
     <!-- /.sidebar -->
 </aside>
+<nav class="navbar navbar-light d-md-none fixed-bottom" style="background-color: blue">
+    <div class="container d-flex justify-content-between row">
+        <div class="col d-lg-none">
+            <a class="nav-link" href="#">
+                <a class="nav-link text-white h6" data-widget="pushmenu" role="button"><i class="fas fa-tachometer-alt "></i> Dashboard</a>
+            </a>
+        </div>
+        <div class="nav-item col">
+            <a class="nav-link" href="#">
+                <a class="nav-link text-white h6" data-widget="pushmenu" role="button"><i class="far fa-user"></i> Compte</a>
+            </a>
+        </div>
+        <div class="nav-item col">
+            <a class="nav-link" href="#">
+                <a class="nav-link text-white h6" data-widget="pushmenu" role="button"><i class="far fa-envelope"></i> Messages</a>
+            </a>
+        </div>
+    </div>
+</nav>
