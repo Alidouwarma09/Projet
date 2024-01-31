@@ -5,10 +5,9 @@ from django.shortcuts import render, get_object_or_404, redirect
 from django.contrib.auth.decorators import login_required, user_passes_test
 from django.urls import reverse
 from django.views import View
-
 from Site.forms import SiteParametersForm
 from Utilisateurs.models import CustomUser, Message, BlogPost
-from Utilisateurs.forms import UserRegistrationForm, MessageForm, BlogPostForm, DeactivateUserForm, ActivateUserForm
+from Utilisateurs.forms import UserRegistrationForm, MessageForm, BlogPostForm
 from django.db.models import Q
 from Site.models import SiteParameters, Visitor
 
@@ -106,15 +105,21 @@ def Messages(request, user_id):
 
 
 @login_required(login_url='utilisateurs:connexion')
-def Create(request):
+def create_blog(request):
     if request.method == 'POST':
         form = BlogPostForm(request.POST, request.FILES)
+        form.request = request  # Passez la requête au formulaire
         if form.is_valid():
-            form.instance.author = request.user
-            form.save()
+            # Ajoutez l'auteur avant de sauvegarder le formulaire
+            blog_post = form.save(commit=False)
+            blog_post.author = request.user  # Assurez-vous que cela attribue l'auteur actuel
+            blog_post.save()
             return redirect('admin:post')
     else:
         form = BlogPostForm()
+
+    # Ajoutez enctype manuellement au formulaire
+    form.fields['image'].widget.attrs['enctype'] = 'multipart/form-data'
 
     return render(request, 'publication/create_blog.html', {'form': form})
 

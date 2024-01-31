@@ -3,9 +3,11 @@ from django.contrib.auth import get_user_model
 from django.db import models
 from django.contrib.auth.models import AbstractBaseUser, BaseUserManager
 from django.db.models import Q
+from django.forms import forms
 from django.urls import reverse
 from django.utils import timezone
 from django.utils.timesince import timesince
+from multiupload.fields import MultiFileField
 
 
 class CustomUserManager(BaseUserManager):
@@ -83,11 +85,8 @@ class BlogPost(models.Model):
     pub_date = models.DateTimeField(auto_now_add=True)
     likes = models.ManyToManyField(get_user_model(), related_name='blog_likes', blank=True)
     shares = models.IntegerField(default=0)
-    image = models.ImageField(upload_to='blog_images/', null=True, blank=True)
+    image = models.ImageField(upload_to='blog_images/', verbose_name="Image d'accueil", blank=True)
     views = models.IntegerField(default=0)
-
-    def has_image(self):
-        return self.image and hasattr(self.image, 'url') and bool(self.image.url)
 
     def get_delete_url(self):
         return reverse('delete_post', args=[str(self.id)])
@@ -98,6 +97,9 @@ class BlogPost(models.Model):
 
     def get_like_count(self):
         return self.likes.count()
+
+    def __str__(self):
+        return f"Image {self.pk}"
 
     def time_pub_date_since(self):
         if self.pub_date:

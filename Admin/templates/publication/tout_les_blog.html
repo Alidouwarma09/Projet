@@ -76,7 +76,7 @@
                                 </td>
                                 <td>
                                     <ul class="list-inline">
-                                        <img class="img-fluid pad" src="{% if tout_les_blog.has_image %}{{ tout_les_blog.image.url }}{% else %}URL_PAR_DEFAUT_SI_PAS_D_IMAGE{% endif %}" alt="Photo" style="max-width: 200px">
+                                        <img class="img-fluid pad" src="{{ tout_les_blog.image.url }}" alt="Photo" style="max-width: 200px">
                                     </ul>
                                 </td>
                                 <td class="project_progress">

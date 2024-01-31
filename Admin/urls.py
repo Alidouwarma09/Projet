@@ -1,8 +1,8 @@
 # admin/urls.py
 from django.urls import path
 from .views import admin_dashboard, admin_create_user, admin_edit_user, admin_delete_user, tous_les_user, utilisateur, \
-    Messages, Create, blog_list, BlogPostDetailView, share_post, All_Blog, delete_post, edit_post, view_blog, \
-    active_utilisateur, desactive_utilisateur, Info_du_site, modifier_parametres
+    Messages, blog_list, BlogPostDetailView, share_post, All_Blog, delete_post, edit_post, view_blog, \
+    active_utilisateur, desactive_utilisateur, Info_du_site, modifier_parametres, create_blog
 
 app_name = 'admin'
 urlpatterns = [
@@ -13,7 +13,7 @@ urlpatterns = [
     path('user/', tous_les_user, name='tous_les_user'),
     path('utilisateur/', utilisateur, name='utilisateur'),
     path('messages/<int:user_id>/', Messages, name='messages'),
-    path('create_blog/', Create, name='create'),
+    path('create_blog/', create_blog, name='create'),
     path('list/', blog_list, name='post'),
     path('All_Blog/', All_Blog, name='All_Blog'),
     path('<int:blog_id>/', BlogPostDetailView.as_view(), name='blog_detail'),

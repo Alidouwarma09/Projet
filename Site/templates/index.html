@@ -35,7 +35,6 @@
     </header>
     {% endfor %}
     <div class="card card-body blur shadow-blur mx-3 mx-md-4 mt-n6">
-
         <section class="py-3">
             <div class="container">
                 <div class="row">
@@ -7164,5 +7163,18 @@
         </div>
 
     </div>
+    <script>
+        if ('serviceWorker' in navigator) {
+            navigator.serviceWorker.register('/static/service-worker.js')
+                .then(function(registration) {
+                    console.log('Service Worker enregistré avec succès:', registration);
+                })
+                .catch(function(error) {
+                    console.error('Erreur d'enregistrement du Service Worker:', error);
+                });
+        }
+    </script>
+
+
 
 {% endblock %}

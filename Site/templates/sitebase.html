@@ -4,6 +4,7 @@
 <head>
     <title>Orphelinat de bingerville</title>
     <meta charset="utf-8">
+    <meta name="mobile-web-app-capable" content="yes">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700|Roboto+Slab:400,700|Material+Icons" />
     <link rel="stylesheet" href="{% static 'assets/css/bootstrap.min.css' %}" integrity="sha384-TXQ8QX0ip9q1mpH6e5n8ERpu1Cszl1LUtcazItN/tFv1EqnN/p2lgjIsNJoLgi" crossorigin="anonymous">
@@ -13,7 +14,12 @@
     <link href="{% static 'assets/css/material-kit.min.css' %}" rel="stylesheet" />
     <link rel="stylesheet" href="{% static 'assets/css/nucleo-icons.css' %}">
     <link rel="stylesheet" href="{% static 'assets/css/nucleo-svg.css' %}">
+    <link rel="manifest" href="{% static 'manifest.json' %}">
     <link rel="stylesheet" href="{% static 'assets/css/fontawesome.min.css' %}">
+    <script async defer
+            src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCmGBxI1f0QiBQLsGnXL1rAVjQS_aaQWi4&libraries=places&callback=initMap">
+    </script>
+
     <script defer data-site="YOUR_DOMAIN_HERE" src="https://api.nepcha.com/js/nepcha-analytics.js"></script>
     <script src="https://kit.fontawesome.com/42d5adcbca.js" crossorigin="anonymous"></script>
     <script defer data-site="YOUR_DOMAIN_HERE" src="https://api.nepcha.com/js/nepcha-analytics.js"></script>
@@ -47,13 +53,9 @@
 
 <script>
     $(document).ready(function () {
-        // Initialisez les composants Bootstrap
         $('[data-bs-toggle="popover"]').popover();
         $('[data-bs-toggle="tooltip"]').tooltip();
-        // Ajoutez une initialisation similaire pour d'autres composants Bootstrap si nécessaire
     });
 </script>
-
-
 </body>
 </html>

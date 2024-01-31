@@ -1,5 +1,7 @@
 # Utilisateurs/forms.py
 from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
+from django.forms import ClearableFileInput
+
 from .models import CustomUser, BlogPost
 from django import forms
 
