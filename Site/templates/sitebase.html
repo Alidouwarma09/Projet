@@ -1,61 +1,81 @@
 {% load static %}
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-    <title>Orphelinat de bingerville</title>
+    <title>Orphelinat de Bingerville</title>
     <meta charset="utf-8">
     <meta name="mobile-web-app-capable" content="yes">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700|Roboto+Slab:400,700|Material+Icons" />
-    <link rel="stylesheet" href="{% static 'assets/css/bootstrap.min.css' %}" integrity="sha384-TXQ8QX0ip9q1mpH6e5n8ERpu1Cszl1LUtcazItN/tFv1EqnN/p2lgjIsNJoLgi" crossorigin="anonymous">
-    <link href="https://fonts.googleapis.com/icon?family=Material+Icons+Round" rel="stylesheet">
-    <link rel="stylesheet" href="{% static 'assets/css/bootstrap.min.css' %}">
-    <link href="{% static 'assets/css/materialkit2.css' %}" rel="stylesheet" />
-    <link href="{% static 'assets/css/material-kit.min.css' %}" rel="stylesheet" />
+    <link rel="stylesheet" href="{% static 'assets/css/bootstrap.min.css' %}" crossorigin="anonymous">
+    <link rel="stylesheet" href="{% static 'assets/css/material-kit.min.css' %}" />
     <link rel="stylesheet" href="{% static 'assets/css/nucleo-icons.css' %}">
     <link rel="stylesheet" href="{% static 'assets/css/nucleo-svg.css' %}">
-    <link rel="manifest" href="{% static 'manifest.json' %}">
     <link rel="stylesheet" href="{% static 'assets/css/fontawesome.min.css' %}">
-    <script async defer
-            src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCmGBxI1f0QiBQLsGnXL1rAVjQS_aaQWi4&libraries=places&callback=initMap">
-    </script>
-
-    <script defer data-site="YOUR_DOMAIN_HERE" src="https://api.nepcha.com/js/nepcha-analytics.js"></script>
+    <link rel="stylesheet" href="{% static 'assets/css/material-kit.min.css' %}">
+    <link rel="manifest" href="{% static 'manifest.json' %}">
     <script src="https://kit.fontawesome.com/42d5adcbca.js" crossorigin="anonymous"></script>
-    <script defer data-site="YOUR_DOMAIN_HERE" src="https://api.nepcha.com/js/nepcha-analytics.js"></script>
-
     {% block css %}
     {% endblock %}
 </head>
-<body  class="index-page bg-gray-200">
+
+<body class="index-page bg-gray-200">
 
 {% block content %}
 {% endblock %}
 
-
-<script src="{% static 'assets/js/plugins/choices.min.js' %}"></script>
-<script src="{% static 'assets/js/plugins/countup.min.js' %}"></script>
-<script src="{% static 'assets/js/plugins/flatpickr.min.js' %}"></script>
-<script src="{% static 'assets/js/plugins/highlight.min.js' %}"></script>
-<script src="{% static 'assets/js/plugins/moment.min.js' %}"></script>
-<script src="{% static 'assets/js/plugins/parallax.min.js' %}"></script>
+<!-- JavaScript Libraries -->
+<script src="{% static 'assets/js/popper.min.js' %}"></script>
+<script src="{% static 'assets/js/bootstrap.min.js' %}"></script>
+<script src="{% static 'assets/js/jquery.min.js' %}"></script>
 <script src="{% static 'assets/js/plugins/perfect-scrollbar.min.js' %}"></script>
+<script src="{% static 'assets/js/plugins/countup.min.js' %}"></script>
+<script src="{% static 'assets/js/plugins/choices.min.js' %}"></script>
 <script src="{% static 'assets/js/plugins/prism.min.js' %}"></script>
+<script src="{% static 'assets/js/plugins/highlight.min.js' %}"></script>
 <script src="{% static 'assets/js/plugins/rellax.min.js' %}"></script>
 <script src="{% static 'assets/js/plugins/tilt.min.js' %}"></script>
-<script src="{% static 'assets/js/plugins/typedjs.js' %}"></script>
-<script src="{% static 'assets/js/materialkit1.js' %}"></script>
-<script src="{% static 'assets/js/materialkit.min.js' %}"></script>
-<script src="{% static 'assets/js/jquery.min.js' %}"></script>
-<script src="{% static 'assets/js/popper.min.js' %}"></script>
 <script src="{% static 'assets/js/bootstrap/bootstrap.bundle.min.js' %}"></script>
-<script src="{% static 'assets/js/bootstrap/bootstrap.min.js' %}"></script>
-
+<script src="{% static 'assets/js/plugins/flatpickr.min.js' %}"></script>
+<script src="{% static 'assets/js/plugins/moment.min.js' %}"></script>
+<script src="{% static 'assets/js/plugins/parallax.min.js' %}"></script>
+<script src="{% static 'assets/js/plugins/material-kit.min.js' %}"></script>
+<script src="{% static 'assets/js/plugins/typedjs.js' %}"></script>
+<script src="{% static 'assets/js/materialkit.min.js' %}"></script>
 <script>
     $(document).ready(function () {
         $('[data-bs-toggle="popover"]').popover();
         $('[data-bs-toggle="tooltip"]').tooltip();
     });
 </script>
+<script type="text/javascript">
+
+    if (document.getElementById('state1')) {
+        const countUp = new CountUp('state1', document.getElementById("state1").getAttribute("countTo"));
+        if (!countUp.error) {
+            countUp.start();
+        } else {
+            console.error(countUp.error);
+        }
+    }
+    if (document.getElementById('state2')) {
+        const countUp1 = new CountUp('state2', document.getElementById("state2").getAttribute("countTo"));
+        if (!countUp1.error) {
+            countUp1.start();
+        } else {
+            console.error(countUp1.error);
+        }
+    }
+    if (document.getElementById('state3')) {
+        const countUp2 = new CountUp('state3', document.getElementById("state3").getAttribute("countTo"));
+        if (!countUp2.error) {
+            countUp2.start();
+        } else {
+            console.error(countUp2.error);
+        };
+    }
+</script>
 </body>
+
 </html>
