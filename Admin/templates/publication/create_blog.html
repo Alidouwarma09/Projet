@@ -1,85 +1,130 @@
-<!-- Admin/templates/user_list.html -->
-{% extends 'base.html' %}
-{% if user.is_authenticated %}
-    {% load static %}
-    {% block content%}
-        <body class="hold-transition dark-mode sidebar-mini layout-fixed layout-navbar-fixed layout-footer-fixed">
-        <style>
-            .success-message {
-                background-color: #d4edda;
-                color: #155724;
-                padding: 10px;
-                margin-bottom: 10px;
-                border: 1px solid #c3e6cb;
-                border-radius: 5px;
-            }
-        </style>
-        {% include 'nav.html' %}
-        <div class="wrapper">
-        <div class="wrapper">
-        <div class="content-wrapper">
-            <section class="content-header">
-                <div class="container-fluid">
-                    <div class="row mb-2">
-                        <div class="col-sm-6">
-                            <h1>Ajout d'un blog</h1>
-                        </div>
-                        <div class="col-sm-6">
-                            <ol class="breadcrumb float-sm-right">
-                                <li class="breadcrumb-item"><a href="#">Accueil</a></li>
-                                <li class="breadcrumb-item active">Faire une publication</li>
-                            </ol>
-                        </div>
-                    </div>
-                </div>
-            </section>
-<section class="content">
+{% load static %}
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <title>Création de Blog</title>
+    <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
+    <link href="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-lite.min.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-lite.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/lang/summernote-fr-FR.min.js"></script>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f8f9fa;
+            margin: 0;
+            padding: 0;
+        }
+
+        .wrapper {
+            max-width: 800px;
+            margin: 50px auto;
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        h1 {
+            color: #007bff;
+        }
+
+        label {
+            display: block;
+            margin-top: 10px;
+            font-weight: bold;
+        }
+
+        input,
+        textarea {
+            width: 100%;
+            padding: 10px;
+            margin-top: 5px;
+            margin-bottom: 20px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            box-sizing: border-box;
+        }
+
+        .custom-file {
+            position: relative;
+            display: inline-block;
+            width: 100%;
+            height: 40px;
+            margin-top: 5px;
+        }
+
+        .custom-file-input {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            opacity: 0;
+        }
+
+        .custom-file-label {
+            display: block;
+            overflow: hidden;
+            white-space: nowrap;
+            text-overflow: ellipsis;
+            background-color: #007bff;
+            color: #fff;
+            border-radius: 4px;
+            padding: 10px;
+            cursor: pointer;
+        }
+
+        .custom-file-label::after {
+            content: "Choisir une image";
+        }
+
+        button {
+            background-color: #28a745;
+            color: #fff;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+<div class="wrapper">
+    <h1>Ajout d'un blog</h1>
     <form method="post" action="{% url 'admin:create' %}" enctype="multipart/form-data">
         {% csrf_token %}
-        <div class="row">
-            <div class="col-md-6">
-                <div class="card card-primary">
-                    <div class="card-header">
-                        <h3 class="card-title">Publication</h3>
-                        <div class="card-tools">
-                            <button type="button" class="btn btn-tool" data-card-widget="collapse" title="Collapse">
-                                <i class="fas fa-minus"></i>
-                            </button>
-                        </div>
-                    </div>
-                    <div class="card-body">
-                        <div class="form-group">
-                            <label for="id_title">Titre</label>
-                            <input type="text" id="id_title" name="title" class="form-control">
-                        </div>
-                        <div class="form-group">
-                            <label for="id_content">Contenu</label>
-                            <textarea id="id_content" name="content" class="form-control" rows="4"></textarea>
-                        </div>
-                        <div class="form-group">
-                            <label for="id_image">Image</label>
-                            <div class="custom-file">
-                                <input type="file" name="image" class="custom-file-input" id="id_image">
-                                <label class="custom-file-label" for="id_image">Choisir une image</label>
-                            </div>
-                        </div>
-                    </div>
-                    <!-- /.card-body -->
-                </div>
-                <!-- /.card -->
-            </div>
+        <label for="id_title">Titre</label>
+        <input type="text" id="id_title" name="title">
+
+        <label for="summernote">Contenu</label>
+        <textarea id="summernote" name="content" rows="4"></textarea>
+
+        <label for="id_image">Image</label>
+        <div class="custom-file">
+            <input type="file" name="image" class="custom-file-input" id="id_image">
+            <label class="custom-file-label" for="id_image">Choisir une image</label>
         </div>
-        <div class="row">
-            <div class="col-12">
-                <button type="submit" class="btn btn-success">Publier</button>
-            </div>
-        </div>
+
+        <button style="width: 100%" type="submit">Publier</button>
     </form>
 
-
-</section>
-    </div>
-{% endblock %}
-{% else %}
-    Vous devez être connecté pour accéder à cette page. <a href="">Se connecter</a>.
-{% endif %}
+    <script>
+        $('#summernote').summernote({
+            placeholder: 'Rediger votre contenu ici',
+            minHeight: 400,
+            lang: 'fr-FR',  // Utilise le fichier de traduction français
+            toolbar: [
+                ['style', ['style']],
+                ['font', ['bold', 'underline', 'clear']],
+                ['color', ['color']],
+                ['para', ['ul', 'ol', 'paragraph']],
+                ['table', ['table']],
+                ['insert', ['link', 'picture', 'video']],
+                ['view', ['fullscreen', 'codeview', 'help']]
+            ]
+        });
+    </script>
+</div>
+</body>
+</html>
