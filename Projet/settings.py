@@ -113,7 +113,7 @@ CORS_ALLOWED_ORIGINS = [
 # }
 
 DATABASES = {
-    'default':dj_database_url.parse(config('DATABASE_URL'))
+    'default': dj_database_url.parse(config('DATABASE_URL'))
 }
 
 # Password validation
@@ -135,8 +135,6 @@ AUTH_PASSWORD_VALIDATORS = [
 ]
 # settings.py
 SECURE_SSL_REDIRECT = False
-
-ALLOWED_HOSTS = ['192.168.11.135', 'localhost', '127.0.0.1']
 
 
 # Internationalization
