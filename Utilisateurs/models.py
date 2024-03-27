@@ -44,8 +44,8 @@ class CustomUser(AbstractBaseUser):
     unread_messages_count = models.IntegerField(default=0)
 
     @property
-    def unread_messages(self):
-        return self.received_messages.filter(is_read=False).count()
+    def get_unread_messages(self):
+        return Message.objects.filter(receiver=self, is_read=False).count()
 
     def time_since_last_logout(self):
         if self.last_logout:

@@ -69,8 +69,16 @@ def tous_les_user(request):
 @login_required(login_url='utilisateurs:connexion')
 @user_passes_test(lambda u: u.role == 'admin')
 def utilisateur(request):
+    messageeee = Message.objects.all()
     utilisateurs = CustomUser.objects.exclude(id=request.user.id)
-    return render(request, 'utlisateurs.html', {'all_users': utilisateurs})
+
+    for utilisateur in utilisateurs:
+        # Filtrer les messages non lus pour chaque utilisateur
+        unread_messages = messageeee.filter(sender=utilisateur)
+        utilisateur.unread_messages = unread_messages
+
+    return render(request, 'utlisateurs.html', {'all_users': utilisateurs, 'messageeee': messageeee})
+
 
 
 @login_required(login_url='utilisateurs:connexion')

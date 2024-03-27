@@ -74,7 +74,7 @@
                                                         </li>
                                                     </ul>
                                                     <a href="{% url 'admin:messages' utilisateur.id %}" class="btn btn-primary btn-block">
-                                                        <b>Messages</b> {% if utilisateur.unread_messages > 0 %}(<span style="color: red; font-size:25px">{{ utilisateur.unread_messages }}</span>){% endif %}
+                                                        <b>Messages</b> {% if utilisateur.unread_messages.exists %}(<span style="color: red; font-size:25px">{{ utilisateur.unread_messages.count }}</span>){% endif %}
                                                     </a>
 
                                                 </div>
