@@ -18,7 +18,6 @@ from decouple import config
 
 BASE_DIR = Path(__file__).resolve().parent.parent
 
-
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/4.2/howto/deployment/checklist/
 
@@ -85,7 +84,8 @@ TEMPLATES = [
 WSGI_APPLICATION = 'Projet.wsgi.application'
 REST_FRAMEWORK = {
     'DEFAULT_PERMISSION_CLASSES': [
-        'rest_framework.permissions.AllowAny',  # Permet à tout le monde d'accéder à votre API. À ajuster en fonction de vos besoins.
+        'rest_framework.permissions.AllowAny',
+        # Permet à tout le monde d'accéder à votre API. À ajuster en fonction de vos besoins.
     ],
     'DEFAULT_AUTHENTICATION_CLASSES': [
         'rest_framework.authentication.BasicAuthentication',
@@ -97,7 +97,6 @@ REST_FRAMEWORK = {
 CORS_ALLOWED_ORIGINS = [
     "http://192.168.11.135:8000",
 ]
-
 
 # Database
 # https://docs.djangoproject.com/en/4.2/ref/settings/#databases
@@ -137,7 +136,6 @@ AUTH_PASSWORD_VALIDATORS = [
 # settings.py
 SECURE_SSL_REDIRECT = False
 
-
 # Internationalization
 # https://docs.djangoproject.com/en/4.2/topics/i18n/
 
@@ -154,7 +152,10 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/4.2/howto/static-files/
 STATIC_URL = '/static/'
-STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
+STATIC_ROOT = BASE_DIR / "staticfiles"
+STATICFILES_DIRS = [
+    os.path.join(BASE_DIR, "static")
+]
 STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
